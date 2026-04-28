@@ -7,6 +7,7 @@
 /dhcpserver
 /dhcptest
 build/
+dist/
 
 # Frontend build output and deps
 frontend/dist/
