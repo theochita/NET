@@ -1,0 +1,13 @@
+FROM golang:1.26-alpine AS builder
+WORKDIR /src
+COPY go.mod go.sum ./
+RUN go mod download
+COPY . .
+RUN CGO_ENABLED=0 go test -c -tags=e2e -o /dhcptest ./e2e/
+
+FROM alpine:3.21
+RUN apk add --no-cache docker-cli
+COPY --from=builder /dhcptest /dhcptest
+ENV DHCP_E2E_CLIENT=1
+ENTRYPOINT ["/dhcptest"]
+CMD ["-test.v"]

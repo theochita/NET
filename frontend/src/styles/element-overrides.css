@@ -1,0 +1,123 @@
+/* Re-theme Element Plus via its own CSS variables so we don't fight the library.
+   Reference: https://element-plus.org/en-US/guide/theming.html */
+
+:root,
+:root[data-theme="dark"] {
+  --el-color-primary: var(--accent);
+  --el-color-success: var(--success);
+  --el-color-warning: var(--warn);
+  --el-color-danger: var(--danger);
+  --el-color-error: var(--danger);
+  --el-color-info: var(--text-secondary);
+
+  --el-bg-color: var(--surface-2);
+  --el-bg-color-page: var(--surface-0);
+  --el-bg-color-overlay: var(--surface-2);
+
+  --el-text-color-primary: var(--text-primary);
+  --el-text-color-regular: var(--text-primary);
+  --el-text-color-secondary: var(--text-secondary);
+  --el-text-color-placeholder: var(--text-tertiary);
+  --el-text-color-disabled: var(--text-tertiary);
+
+  --el-border-color: var(--border-subtle);
+  --el-border-color-light: var(--border-subtle);
+  --el-border-color-lighter: var(--border-subtle);
+  --el-border-color-extra-light: var(--border-subtle);
+  --el-border-color-dark: var(--border-strong);
+
+  --el-fill-color: var(--surface-3);
+  --el-fill-color-light: var(--surface-3);
+  --el-fill-color-lighter: var(--surface-2);
+  --el-fill-color-blank: var(--surface-2);
+
+  --el-font-family: var(--font-ui);
+  --el-font-size-base: var(--fs-13);
+
+  --el-border-radius-base: var(--r-md);
+  --el-border-radius-small: var(--r-sm);
+}
+
+:root[data-theme="light"] {
+  /* Light mode uses the same mapping — tokens already swap above. */
+}
+
+/* Table rows: stronger contrast between row and header in dark mode */
+.el-table {
+  background: var(--surface-2) !important;
+  color: var(--text-primary) !important;
+}
+.el-table th.el-table__cell {
+  background: var(--surface-3) !important;
+  color: var(--text-secondary) !important;
+  font-weight: 600 !important;
+  font-size: var(--fs-11) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+}
+.el-table td.el-table__cell {
+  border-bottom: 1px solid var(--border-subtle) !important;
+}
+.el-table tr:hover > td.el-table__cell {
+  background: var(--surface-3) !important;
+}
+
+/* Forms */
+.el-input__wrapper,
+.el-textarea__inner,
+.el-select .el-input__wrapper {
+  background: var(--surface-0) !important;
+  box-shadow: 0 0 0 1px var(--border-subtle) inset !important;
+}
+.el-input__wrapper.is-focus,
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--accent) inset !important;
+}
+
+/* Tags */
+.el-tag {
+  border-radius: var(--r-sm) !important;
+  font-weight: 500 !important;
+  font-size: var(--fs-11) !important;
+  padding: 0 var(--sp-2) !important;
+  line-height: 18px !important;
+  height: auto !important;
+}
+
+/* Progress bar track colour */
+.el-progress-bar__outer {
+  background: var(--surface-3) !important;
+}
+
+/* Messages (toasts) */
+.el-message {
+  background: var(--surface-2) !important;
+  border: 1px solid var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-ui) !important;
+}
+
+/* Buttons — primary keeps accent, default uses surface-3 */
+.el-button {
+  font-family: var(--font-ui) !important;
+  font-weight: 500 !important;
+  border-radius: var(--r-md) !important;
+}
+.el-button:not(.el-button--primary):not(.el-button--success):not(.el-button--warning):not(.el-button--danger) {
+  background: var(--surface-3) !important;
+  border-color: var(--border-subtle) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Switches — accent-coloured when on */
+.el-switch.is-checked .el-switch__core {
+  background: var(--success) !important;
+  border-color: var(--success) !important;
+}
+
+/* Global focus ring */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: var(--r-sm);
+}

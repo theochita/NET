@@ -1,0 +1,36 @@
+networks:
+  dhcp-test:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.99.0.0/24
+          gateway: 172.99.0.254
+
+services:
+  server:
+    container_name: dhcp-e2e-server
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.server
+    networks:
+      dhcp-test:
+        ipv4_address: 172.99.0.1
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - NET_BIND_SERVICE
+
+  client:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.client
+    networks:
+      - dhcp-test
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - NET_BIND_SERVICE
+    depends_on:
+      - server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro

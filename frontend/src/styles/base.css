@@ -1,0 +1,249 @@
+/* Font faces */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../assets/fonts/inter-variable.woff2') format('woff2-variations'),
+       url('../assets/fonts/inter-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'JetBrains Mono';
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+  /* If the file is a .ttf fallback, change to format('truetype') and url to .ttf */
+  src: url('../assets/fonts/jetbrains-mono-variable.woff2') format('woff2-variations'),
+       url('../assets/fonts/jetbrains-mono-variable.woff2') format('woff2');
+}
+
+/* Reset + defaults */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+html {
+  background: var(--surface-0);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: var(--fs-13);
+  line-height: var(--lh-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Scrollbars — subtle, theme-aware */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-3);
+  border-radius: 5px;
+  border: 2px solid var(--surface-0);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border-strong);
+}
+
+/* Selection */
+::selection {
+  background: var(--accent-subtle);
+  color: var(--text-primary);
+}
+
+/* Route transition */
+.route-fade-enter-active,
+.route-fade-leave-active {
+  transition: opacity var(--t-fast);
+}
+.route-fade-enter-from,
+.route-fade-leave-to {
+  opacity: 0;
+}
+
+/* ── Font fallback ─────────────────────────────────────────────── */
+button { font-family: var(--font-ui); }
+input, select { font-family: var(--font-ui); color: inherit; }
+
+/* ── Form controls ─────────────────────────────────────────────── */
+.select, .input {
+  background: var(--surface-0);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  height: 28px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: var(--fs-12);
+  outline: none;
+  min-width: 240px;
+}
+.input { min-width: auto; }
+.select:hover, .input:hover,
+.select:focus, .input:focus { border-color: var(--accent); }
+.select option {
+  background: var(--surface-2);
+  color: var(--text-primary);
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  height: 28px;
+  padding: 0 var(--sp-3);
+  font-size: var(--fs-12);
+  font-weight: 500;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-3);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+.btn:hover:not(:disabled) { border-color: var(--border-strong); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn.primary:hover:not(:disabled) { filter: brightness(1.1); }
+.btn.danger  { background: var(--danger); border-color: var(--danger); color: #fff; }
+.btn.danger:hover:not(:disabled) { filter: brightness(1.1); }
+.btn.sm { height: 24px; padding: 0 var(--sp-2); font-size: var(--fs-11); }
+.btn.ghost { background: transparent; }
+
+/* ── Form grid ─────────────────────────────────────────────────── */
+.form {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: var(--sp-3) var(--sp-4);
+  max-width: 640px;
+  align-items: center;
+}
+.form .lbl { color: var(--text-secondary); font-size: var(--fs-12); }
+.form .ctl { display: flex; align-items: center; gap: var(--sp-2); }
+.form .ctl .hint { color: var(--text-tertiary); font-size: var(--fs-12); }
+.form .ctl .unit { color: var(--text-tertiary); font-size: var(--fs-12); }
+.form .ctl input,
+.form .ctl select {
+  background: var(--surface-0);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  height: 28px;
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: var(--fs-12);
+  font-family: var(--font-ui);
+  outline: none;
+  min-width: 0;
+  width: 100%;
+}
+.form .ctl input:hover, .form .ctl input:focus,
+.form .ctl select:hover, .form .ctl select:focus { border-color: var(--accent); }
+.form .ctl input[type=number] { width: 120px; flex: 0 0 auto; }
+.form .ctl input[type=number]::-webkit-outer-spin-button,
+.form .ctl input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.form .ctl input[type=number] { -moz-appearance: textfield; }
+
+/* ── Tables ────────────────────────────────────────────────────── */
+.tbl { width: 100%; border-collapse: collapse; font-size: var(--fs-12); }
+.tbl th {
+  background: var(--surface-3);
+  color: var(--text-secondary);
+  font-weight: 600;
+  font-size: var(--fs-11);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  text-align: left;
+  padding: 6px var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+  white-space: nowrap;
+}
+.tbl td {
+  padding: 6px var(--sp-3);
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+.tbl tr:last-child td { border-bottom: none; }
+.tbl tr:hover td { background: var(--surface-3); }
+
+.mono { font-family: var(--font-mono); font-size: var(--fs-12); color: var(--text-primary); }
+.mono.accent { color: var(--mono-accent); }
+.mono.muted { color: var(--text-secondary); }
+.copyable { cursor: pointer; }
+.copyable:hover { text-decoration: underline dotted; }
+.ttl { font-family: var(--font-mono); font-size: var(--fs-12); }
+.ttl[data-variant="ok"]     { color: var(--success); }
+.ttl[data-variant="warn"]   { color: var(--warn); }
+.ttl[data-variant="danger"] { color: var(--danger); }
+
+/* ── Tags ──────────────────────────────────────────────────────── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 1px 6px;
+  font-size: var(--fs-11);
+  font-weight: 500;
+  border-radius: var(--r-sm);
+  line-height: 16px;
+}
+.tag[data-v="success"]               { background: var(--success-subtle); color: var(--success); }
+.tag[data-v="warning"], .tag[data-v="warn"]  { background: var(--warn-subtle);    color: var(--warn); }
+.tag[data-v="danger"],  .tag[data-v="error"] { background: var(--danger-subtle);  color: var(--danger); }
+
+/* ── Progress bar ──────────────────────────────────────────────── */
+.prog { height: 6px; background: var(--surface-3); border-radius: 3px; overflow: hidden; }
+.prog .fill { height: 100%; background: var(--accent); transition: width var(--t-med); }
+.prog-row { display: flex; align-items: center; gap: var(--sp-2); }
+.prog-row .pct {
+  font-family: var(--font-mono);
+  font-size: var(--fs-11);
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── Add-row (options panel) ───────────────────────────────────── */
+.add-row {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--sp-3);
+}
+.add-row input,
+.add-row select {
+  height: 28px;
+  background: var(--surface-0);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  padding: 0 var(--sp-3);
+  border-radius: var(--r-md);
+  font-size: var(--fs-12);
+  font-family: var(--font-ui);
+  outline: none;
+}
+.add-row input:hover,  .add-row input:focus,
+.add-row select:hover, .add-row select:focus { border-color: var(--accent); }
+.add-row select option { background: var(--surface-2); color: var(--text-primary); }
+.add-row input[type=number]::-webkit-outer-spin-button,
+.add-row input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.add-row input[type=number] { -moz-appearance: textfield; }
