@@ -6,7 +6,7 @@
 /NET_app
 /dhcpserver
 /dhcptest
-build/bin/
+build/
 
 # Frontend build output and deps
 frontend/dist/
